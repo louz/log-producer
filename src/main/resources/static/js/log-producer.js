@@ -37,7 +37,7 @@ $("#btnStart").click(function() {
     $.post(
         "/log-producer",
         {
-            logPerSecond: $("#inputSpeed").val(),
+            logPerSecond: $("#inputExpectSpeed").val(),
             total: $("#inputTotal").val(),
             length: $("#inputLength").val()
         },
