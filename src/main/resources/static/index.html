@@ -8,7 +8,8 @@
     <title>Log Producer</title>
 
     <!-- Bootstrap -->
-    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,107 +19,108 @@
     <![endif]-->
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Log Producer</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
 <div class="container">
 
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Log Producer</a>
+    <div class="starter-template">
+        <div class="panel panel-default">
+            <div class="panel-heading">Configuration</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputExpectSpeed" class="col-sm-2 control-label">Expect Log Speed(tps)</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputExpectSpeed" value="10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTotal" class="col-sm-2 control-label">Expect Total Logs</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputTotal" value="100">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTotal" class="col-sm-2 control-label">Log Length(Chars)</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputLength" value="512">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 pull-right">
+                            <button type="button" id="btnStart" class="btn btn-primary form-control">GO !</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">配置</div>
-        <div class="panel-body">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputSpeed" class="col-sm-2 control-label">日志产生速度(tps)</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputSpeed" placeholder="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputTotal" class="col-sm-2 control-label">日志总条数</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputTotal" placeholder="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputTotal" class="col-sm-2 control-label">每条日志字符数</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputLength" value="512">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2 pull-right">
-                        <button type="button" id="btnStart" class="btn btn-primary form-control">开始生成</button>
-                    </div>
-                </div>
-            </form>
         </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">进度</div>
-        <div class="panel-body">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">ID</label>
-                    <div class="col-sm-10">
-                        <p id="progressIdSpan" class="form-control-static"></p>
+        <div class="panel panel-default">
+            <div class="panel-heading">Progress</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">ID</label>
+                        <div class="col-sm-10">
+                            <p id="progressIdSpan" class="form-control-static"></p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">开始时间</label>
-                    <div class="col-sm-4">
-                        <p id="beginAt" class="form-control-static"></p>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Begin Time</label>
+                        <div class="col-sm-4">
+                            <p id="beginAt" class="form-control-static"></p>
+                        </div>
+                        <label class="col-sm-2 control-label">Used Time</label>
+                        <div class="col-sm-4">
+                            <p id="usedTime" class="form-control-static"></p>
+                        </div>
                     </div>
-                    <label class="col-sm-2 control-label">耗时</label>
-                    <div class="col-sm-4">
-                        <p id="usedTime" class="form-control-static"></p>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">结束时间</label>
-                    <div class="col-sm-4">
-                        <p id="endAt" class="form-control-static"></p>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">End Time</label>
+                        <div class="col-sm-4">
+                            <p id="endAt" class="form-control-static"></p>
+                        </div>
+                        <label class="col-sm-2 control-label">Speed(tps)</label>
+                        <div class="col-sm-4">
+                            <p id="speed" class="form-control-static"></p>
+                        </div>
                     </div>
-                    <label class="col-sm-2 control-label">实际速度(tps)</label>
-                    <div class="col-sm-4">
-                        <p id="speed" class="form-control-static"></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">进度</label>
-                    <div class="col-sm-10" style="padding-top: 7px;">
-                        <div class="progress">
-                            <div id="progressBar" class="progress-bar" role="progressbar">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Progress</label>
+                        <div class="col-sm-10" style="padding-top: 7px;">
+                            <div class="progress">
+                                <div id="progressBar" class="progress-bar" role="progressbar">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+
     </div>
 
-</div> <!-- /container -->
+</div><!-- /.container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
