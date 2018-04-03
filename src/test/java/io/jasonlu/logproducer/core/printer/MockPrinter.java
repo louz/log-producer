@@ -1,4 +1,6 @@
-package io.jasonlu.logproducer.core;
+package io.jasonlu.logproducer.core.printer;
+
+import io.jasonlu.logproducer.core.Printer;
 
 import java.util.ArrayList;
 import java.util.List;

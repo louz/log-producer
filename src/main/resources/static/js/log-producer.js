@@ -39,7 +39,8 @@ $("#btnStart").click(function() {
         {
             logPerSecond: $("#inputExpectSpeed").val(),
             total: $("#inputTotal").val(),
-            length: $("#inputLength").val()
+            length: $("#inputLength").val(),
+            type: $("input[name='inputLogType']:checked").val()
         },
         function (progressId) {
             checkProgress(progressId);

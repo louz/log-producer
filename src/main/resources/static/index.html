@@ -47,6 +47,23 @@
             <div class="panel-body">
                 <form class="form-horizontal">
                     <div class="form-group">
+                        <label for="optionsRadios1" class="col-md-2 control-label">Log Type</label>
+                        <div class="col-md-10">
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="inputLogType" id="optionsRadios1" value="systemOutPrinter" checked>
+                                    System Out
+                                </label>
+                            </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="inputLogType" id="optionsRadios2" value="loggerPrinter">
+                                    Log file (File Path: /tmp/log/logger-printer.log, max size: 10MB)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputExpectSpeed" class="col-md-2 control-label">Expect Speed(tps)</label>
                         <div class="col-md-10">
                             <input type="number" class="form-control" id="inputExpectSpeed" value="10">

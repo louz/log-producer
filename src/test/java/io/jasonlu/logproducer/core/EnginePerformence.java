@@ -1,5 +1,6 @@
 package io.jasonlu.logproducer.core;
 
+import io.jasonlu.logproducer.core.printer.SystemOutPrinter;
 import io.jasonlu.logproducer.domain.Progress;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -20,17 +21,18 @@ public class EnginePerformence {
     @ParameterizedTest
     @CsvSource({ "10, 100", "100, 1000", "1000, 10000" })
     */
-
-    @Before
-    public void setUp() {
-        engine.setPrinter(new SystemOutPrinter());
-    }
+//
+//    @Before
+//    public void setUp() {
+//        engine.setPrinter(new SystemOutPrinter());
+//    }
 
     @Test
     @Parameters({ "10, 100", "1000, 10000", "100000, 1000000" })
     public void testExecDoneInTime(int logsPerSecond, int total) {
         Progress progress = new Progress(total);
-        engine.exec(logsPerSecond, total, 100, progress);
+        Printer printer = new SystemOutPrinter();
+        engine.exec(printer, logsPerSecond, total, 100, progress);
 
         // 耗时为total - 1 次 正负 NANO_500000 纳秒误差以内
         assertTrue(progress.getUsedNanos() > (total - 1) * Engine.NANO_PER_SECOND / logsPerSecond - NANO_500000 && progress.getUsedNanos() <= total * Engine.NANO_PER_SECOND / logsPerSecond + NANO_500000);

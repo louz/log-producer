@@ -1,6 +1,7 @@
 package io.jasonlu.logproducer.service;
 
 import io.jasonlu.logproducer.Application;
+import io.jasonlu.logproducer.core.printer.SystemOutPrinter;
 import io.jasonlu.logproducer.domain.Progress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class LogServiceTest {
         Progress progress = new Progress(total);
 
         assertFalse(progress.isRunning());
-        logService.produce(logPerSecond, total, 100, progress);
+        logService.produce(new SystemOutPrinter(), logPerSecond, total, 100, progress);
 
         Thread.sleep(1000);
         assertTrue(progress.isRunning());

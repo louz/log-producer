@@ -1,9 +1,10 @@
 package io.jasonlu.logproducer.core;
 
+import io.jasonlu.logproducer.core.printer.MockPrinter;
+import io.jasonlu.logproducer.core.printer.SystemOutPrinter;
 import io.jasonlu.logproducer.domain.Progress;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.core.Is;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,11 +20,11 @@ import static org.junit.Assert.assertTrue;
 public class EngineTest {
 
     private Engine engine = new Engine();
-
-    @Before
-    public void setUp() {
-        engine.setPrinter(new SystemOutPrinter());
-    }
+//    private Printer printer = new SystemOutPrinter();
+//    @Before
+//    public void setUp() {
+//        engine.setPrinter(new SystemOutPrinter());
+//    }
 
     @Test
     public void testExecWithProgressObserver() {
@@ -32,7 +33,8 @@ public class EngineTest {
         Progress process = new Progress(total);
 
         assertFalse(process.isRunning());
-        engine.exec(logsPerSecond, total, 100, process);
+        Printer printer = new SystemOutPrinter();
+        engine.exec(printer, logsPerSecond, total, 100, process);
         assertTrue(process.isFinished());
     }
 
@@ -43,9 +45,9 @@ public class EngineTest {
         Progress progress = new Progress(total);
 
         MockPrinter printer = new MockPrinter();
-        engine.setPrinter(printer);
+//        engine.setPrinter(printer);
 
-        engine.exec(1, total, length, progress);
+        engine.exec(printer, 1, total, length, progress);
 
         List<String> resultLines = printer.getLines();
         assertThat(resultLines.size(), Is.is(total));

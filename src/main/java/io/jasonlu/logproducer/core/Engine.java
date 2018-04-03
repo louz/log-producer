@@ -1,7 +1,6 @@
 package io.jasonlu.logproducer.core;
 
 import io.jasonlu.logproducer.domain.Progress;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,14 +13,7 @@ public class Engine {
 
     private static final long NANO_PER_MILLISECCOND = 1000000L;
 
-    @Autowired
-    private Printer printer;
-
-    void setPrinter(Printer printer) {
-        this.printer = printer;
-    }
-
-    public void exec(int logsPerSecond, int total, int length, Progress progress) {
+    public void exec(Printer printer, int logsPerSecond, int total, int length, Progress progress) {
         String fixedString = buildFixedString(length);
 
         long begin = System.nanoTime();
